@@ -11,7 +11,7 @@ if [[ $1 =~ ^[0-9]+$ ]]
   then
     CONDITION="e.atomic_number = $1"
   else
-    CONDITION="e.symbol = '$1' OR e.name = '$1'"
+    CONDITION="LOWER(e.symbol) = LOWER('$1') OR LOWER(e.name) = LOWER('$1')"
 fi
 
 RESULT=$($PSQL "SELECT e.atomic_number, e.name, e.symbol, t.type, p.atomic_mass, p.melting_point_celsius, p.boiling_point_celsius
